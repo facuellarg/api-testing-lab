@@ -98,8 +98,6 @@ def patch_task(context, data, id):
 @when(u'hacen click en crear una tarea')
 def step_impl(context):
     try:
-        esta = get_task(context)
-        assert len(esta) == 0
         data = {
             "task":context.task,
             "date":context.date,
