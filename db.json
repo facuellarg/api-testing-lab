@@ -18,6 +18,13 @@
       "date": "01/01/2024",
       "state": "testing",
       "responsable": "tester"
+    },
+    {
+      "id": "2",
+      "task": "tarea_test2",
+      "date": "01/01/2024",
+      "state": "testing invalid",
+      "responsable": "tester"
     }
   ]
 }

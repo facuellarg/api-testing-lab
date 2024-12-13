@@ -11,7 +11,7 @@
   Scenario: Asignar tarea a usuario
     Given un nombre "tarea01"
     And un responsable "freddy"
-    When  hago una solicitud Post a "/tareas"
+    When  hago una solicitud Patch a "/tareas"
     Then asigna esa tarea al usuaio
 
   Scenario: Filtrar tarea por estado

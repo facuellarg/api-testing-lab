@@ -19,7 +19,6 @@ def step_impl(context, responsable):
     context.base_url = "http://localhost:3000/tareas"
     context.responsable = responsable
 
-
 def get_task(context):
     try:
         headers = {
@@ -49,7 +48,6 @@ def get_tasks_by_state(context):
     except requests.exceptions.RequestException as e:
         print(f"Error al realizar el GET: {e}")
         return None
-
 
 def post_task(context, data):  
     headers = {
@@ -114,7 +112,7 @@ def step_impl(context, id):
     assert context.id is not None
 
 
-@when(u'hago una solicitud Post a "/tareas"')
+@when(u'hago una solicitud Patch a "/tareas"')
 def step_impl(context):
     try:
         task = get_task(context)
@@ -130,9 +128,6 @@ def step_impl(context):
     except requests.exceptions.RequestException as e:
         (f"Error al realizar el POST: {e}")
         return None
-
-        
-
 
 
 @then(u'asigna esa tarea al usuaio')
