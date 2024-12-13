@@ -13,9 +13,11 @@
   },
   "tareas": [
     {
-      "id": "2c90",
-      "task": "tarea01",
-      "date": "01/01/2024"
+      "id": "1",
+      "task": "tarea_test",
+      "date": "01/01/2024",
+      "state": "testing",
+      "responsable": "tester"
     }
   ]
 }
