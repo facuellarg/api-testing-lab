@@ -1,15 +1,15 @@
 import pandas as pd
-
+from model import Tarea
 class TaskManager:
     DB_COLUMNS=["id","task","date","state","responsable"] 
     tarea_counter = 0
-    def create(self,db,nombre_tarea, fecha_limite):
+    def create(self,db,tarea:Tarea):
         new_id = TaskManager.tarea_counter
-        db.append(pd.DataFrame({"id":[new_id],
-                                "task":[nombre_tarea],
-                                "date":[fecha_limite],
+        db.append(pd.DataFrame({"id":new_id,
+                                "task":[tarea.task],
+                                "date":[tarea.date],
                                 "state":["TO_DO"],
-                                "responsable":[None],
+                                "responsable":[tarea.responsable],
                                 }))
         TaskManager.tarea_counter += 1
         return new_id
