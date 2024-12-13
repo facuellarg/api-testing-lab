@@ -18,7 +18,7 @@ class TaskManager:
         output = db[db["estado"]==estado]
         return output
     
-    def asignar(self,db,id_tarea, responsable_id):
-        db.loc[db["id"]==id_tarea:"responsable"]=responsable_id
+    def asignar(self,db,id_tarea, tarea:Tarea):
+        db.loc[db["id"]==id_tarea:"responsable"]=tarea.responsable
         return (db.loc[db["id"]==id_tarea].reset_index()).iloc[0]
     
