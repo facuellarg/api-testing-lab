@@ -15,7 +15,10 @@ class TaskManager:
         return new_id
     
     def filtrar(self,db,estado):
-        return []
+        output = db[db["estado"]==estado]
+        return output
     
-    def asignar(self,db,tarea_name, responsable_id):
-        return True
+    def asignar(self,db,tarea, responsable_id):
+        db.loc[db["task"]==tarea:"responsable"]=responsable_id
+        return (db.loc[db["task"]==tarea].reset_index()).iloc[0]
+    
