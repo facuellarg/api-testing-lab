@@ -11,11 +11,10 @@
   Scenario: Asignar tarea a usuario
     Given un nombre "tarea01"
     And un responsable "freddy"
-    When hacen click en asignar una tarea
-    Then responde confirmacion de creacion
+    When  hago una solicitud Post a "/tareas"
+    Then asigna esa tarea al usuaio
 
   Scenario: Filtrar tarea por estado
-    Given un nombre "tarea01"
-    And un responsable "estado"
-    When hacen click en asignar una tarea
-    Then responde numero de tareas encontradas
+    Given un estado "testing"
+    When hago una solicitud GET a "/tareas"
+    Then responde lista de tareas encontradas
