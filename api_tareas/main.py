@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 import pandas as pd
+from logic import TaskManager
 
 app = FastAPI()
-bd_tabla_tareas= pd.DataFrame(columns=["id","task","date","state","responsable"])
-id_task = 0
+bd_tabla_tareas= pd.DataFrame(columns=TaskManager.DB_COLUMNS)
 
 
 #filtrar por estado
