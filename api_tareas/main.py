@@ -2,24 +2,48 @@ from fastapi import FastAPI
 import pandas as pd
 from logic import TaskManager
 from model import Tarea
+from model import Responsable
 
 
 app = FastAPI()
-bd_tabla_tareas= pd.DataFrame(columns=TaskManager.DB_COLUMNS)
+init_values =  [{
+    "id": "1",
+    "task": "tarea_test",
+    "date": "01/01/2024",
+    "state": "testing",
+    "responsable": "tester"
+},
+{
+    "id": "2",
+    "task": "tarea_test2",
+    "date": "01/01/2024",
+    "state": "testing invalid",
+    "responsable": "tester"
+},
+{
+    "id": "3",
+    "task": "tarea_test2",
+    "date": "01/01/2024",
+    "state": "testing invalid",
+    "responsable": "other invalid"
+},
+]
+db_tasks= pd.DataFrame(init_values)
+
 taskManager=TaskManager()
 
 #filtrar por estado
 @app.get("/tareas")
-async def root(estado):
-    output=taskManager.filtrar(bd_tabla_tareas,estado).to_dict("records")
+async def root(state:str):
+    output=taskManager.filter(db_tasks,state).to_dict("records")
     return output
 #crear tarea nueva
 @app.post("/tareas")
-async def root(tarea: Tarea):
-    output = taskManager.create(tarea).to_dict("records")
-    return output
+async def root(task: Tarea):
+    id = taskManager.create(db_tasks,task)
+    return id
 #asignar tarea a usuario
 @app.patch("/tareas/{task_id}")
-async def root(task_id : str, tarea:Tarea):
-    output = taskManager.asignar(task_id,tarea).to_dict()
+async def root(task_id : str, responsable:Responsable):
+    output = taskManager.assing(db_tasks, task_id, responsable).to_dict()
     return output

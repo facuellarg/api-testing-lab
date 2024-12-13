@@ -9,10 +9,10 @@
     Then responde el identificador de la tarea "1"
 
   Scenario: Asignar tarea a usuario
-    Given un nombre "tarea01"
+    Given un id de una tarea "3"
     And un responsable "freddy"
     When  hago una solicitud Patch a "/tareas"
-    Then asigna esa tarea al usuaio
+    Then asigna esa tarea al usuario
 
   Scenario: Filtrar tarea por estado
     Given un estado "testing"

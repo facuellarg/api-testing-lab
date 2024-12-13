@@ -9,6 +9,10 @@ def step_impl(context, task):
     context.base_url = "http://localhost:3000/tareas"
     context.task = task
 
+@given(u'un id de una tarea "{id}"')
+def step_impl(context, id):
+    context.task_id = id
+
 
 @given(u'una fecha "{date}"')
 def step_impl(context, date):
@@ -60,11 +64,8 @@ def post_task(context, data):
             data=json.dumps(data),
             headers=headers
         )
-        
-        # Verificar si la petición fue exitosa
         response.raise_for_status()
         
-        # Retornar datos creados
         return response.json()
         
     except requests.exceptions.RequestException as e:
@@ -78,7 +79,7 @@ def patch_task(context, data, id):
     try:
         # Realizar petición POST
         response = requests.patch(
-            f'{context.base_url}/{id}',
+            f'{context.base_url}/{str(id)}',
             data=json.dumps(data),
             headers=headers
         )
@@ -115,22 +116,16 @@ def step_impl(context, id):
 @when(u'hago una solicitud Patch a "/tareas"')
 def step_impl(context):
     try:
-        task = get_task(context)
-        task = task[0]
         data = {
-            "id": task['id'],
-            "task":task['task'],
-            "date":task['date'],
-            "state":task['state'],
             "responsable":context.responsable
         }
-        context.task_created = patch_task(context,data,task['id'])
+        context.task_created = patch_task(context,data,context.task_id)
     except requests.exceptions.RequestException as e:
         (f"Error al realizar el POST: {e}")
         return None
 
 
-@then(u'asigna esa tarea al usuaio')
+@then(u'asigna esa tarea al usuario')
 def step_impl(context):
     assert context.task_created['responsable'] == context.responsable
 
