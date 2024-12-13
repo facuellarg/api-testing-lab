@@ -1,6 +1,9 @@
 {
     "posts": [
       { "id": 1, "title": "Hola Mundo", "author": "John Doe" }
-    ]
+    ],
+    "tests":{
+      "1":{"name":"testing"}
+    }
   }
   

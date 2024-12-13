@@ -4,6 +4,7 @@ from behave import given, when, then
 @given('el servidor está activo')
 def step_server_active(context):
     context.base_url = "http://localhost:3000"
+    
 
 @when('hago una solicitud GET a "{endpoint}"')
 def step_make_get_request(context, endpoint):
